@@ -7,19 +7,10 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="module-library">
+    <orderEntry type="module-library" exported="">
       <library>
         <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../Program Files/Java/Dependencies/json-20230618.jar!/" />
-        </CLASSES>
-        <JAVADOC />
-        <SOURCES />
-      </library>
-    </orderEntry>
-    <orderEntry type="module-library">
-      <library>
-        <CLASSES>
-          <root url="jar://$MODULE_DIR$/../../../Program Files/Java/Dependencies/fastjson-2.0.41.jar!/" />
+          <root url="jar://$MODULE_DIR$/../../../Program Files/Java/Dependencies/fastjson2-2.0.41.android4.jar!/" />
         </CLASSES>
         <JAVADOC />
         <SOURCES />

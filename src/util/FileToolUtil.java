@@ -1,10 +1,12 @@
 package util;
 
-import org.json.JSONObject;
-import org.json.JSONTokener;
+import com.alibaba.fastjson2.JSON;
+import com.alibaba.fastjson2.JSONObject;
+import com.alibaba.fastjson2.util.IOUtils;
 
 import java.io.*;
 import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -54,13 +56,15 @@ public class FileToolUtil {
             os.write(tmpData, 0, tmpDataLen);
             fileLen -= tmpDataLen;
         }
-        is.read(tmpData, 0, fileLen);
-        os.write(tmpData, 0, fileLen);
+        if(fileLen>0){
+            is.read(tmpData, 0, fileLen);
+            os.write(tmpData, 0, fileLen);
+        }
     }
     
     // 将map<String, String>写入json文件
     public static void writeJson(String jsonPath, Map<String, String> inMap){
-        String data = new JSONObject(inMap).toString();
+        String data = JSON.toJSONString(inMap);
         File jsonFile = new File(jsonPath);
         try {
             // 验证json文件是否存在，不存在且创建失败则直接返回
@@ -78,9 +82,10 @@ public class FileToolUtil {
     }
 
     // 将json文件内容读取到map<String, String>
-    public static JSONObject readJson(String jsonPath) throws FileNotFoundException {
-        JSONTokener jt = new JSONTokener(new FileReader(new File(jsonPath)));
-        JSONObject jo = (JSONObject) jt.nextValue();
+    public static JSONObject readJson(String jsonPath) throws IOException {
+        File jsonFile = new File(jsonPath);
+        String jsonString = Files.readString(jsonFile.toPath());
+        JSONObject jo = JSONObject.parseObject(jsonString);
         return jo;
     }
 

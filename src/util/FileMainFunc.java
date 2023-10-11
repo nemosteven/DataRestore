@@ -1,13 +1,10 @@
 package util;
 
-import org.json.JSONObject;
+import com.alibaba.fastjson2.JSONObject;
 
 import java.io.*;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 import static util.FileToolUtil.*;
 
@@ -42,7 +39,7 @@ public class FileMainFunc {
         InputStream is = null;
         OutputStream os = null;
         int fileNum = filePathSet.size();
-        HashMap<String, String> metaMap = new HashMap<String, String>();
+        LinkedHashMap<String, String> metaMap = new LinkedHashMap<String, String>();
         // 根据当前时间，为备份文件命名
         SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd_HHmmss");
         Calendar calendar = Calendar.getInstance();
@@ -75,8 +72,11 @@ public class FileMainFunc {
         JSONObject metaJson = readJson(backJsonPath);
         int fileLen = -1;
         for(String key : metaJson.keySet()){
-            fileLen = metaJson.getInt(key);
+            fileLen = metaJson.getIntValue(key);
             fileRestoreSingle(is, resDir+key, fileLen);
         }
+//        for (int i = 0; i < metaJson.length(); i++) {
+//            String key = metaJson.
+//        }
     }
 }
