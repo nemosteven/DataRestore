@@ -23,7 +23,7 @@ public class ResManager {
         this.encryType = encryType;
     }
 
-    public static void fileRestore(String backFilePath, String resDir) throws IOException {
+    public void fileRestore(String backFilePath) throws IOException {
         String backJsonPath = backFilePath+".json";
         File backFile = new File(backFilePath);
         FileInputStream is = new FileInputStream(backFile);
@@ -31,7 +31,7 @@ public class ResManager {
         int fileLen = -1;
         for(String key : metaJson.keySet()){
             fileLen = metaJson.getIntValue(key);
-            fileRestoreSingle(is, resDir+key, fileLen);
+            fileRestoreSingle(is, this.resDir+key, fileLen);
         }
     }
 

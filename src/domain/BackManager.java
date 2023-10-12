@@ -45,9 +45,9 @@ public class BackManager {
     public BackManager() {
     }
 
-    public static String fileExtract(List<String> filePathSet, String srcDir, String backDir, int[] srcSize) {
+    public String fileExtract(List<String> filePathSet, String srcDir, int[] srcSize) {
         String backFilePath = "";
-        File back = new File(backDir);
+        File back = new File(this.backDir);
         // 判断目的目录是否存在，不存在且创建失败则直接返回
         if(!dirExistEval(back))
             return backFilePath;
@@ -59,7 +59,7 @@ public class BackManager {
         // 根据当前时间，为备份文件命名
         SimpleDateFormat df = new SimpleDateFormat("yyyyMMdd_HHmmss");
         Calendar calendar = Calendar.getInstance();
-        backFilePath = backDir + df.format(calendar.getTime());
+        backFilePath = this.backDir + df.format(calendar.getTime());
         // 缓存容器
         try {
             os = new FileOutputStream(backFilePath);
